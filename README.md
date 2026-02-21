@@ -1,17 +1,19 @@
-# BlackRock Challenge – Backend API
-
-This project implements the BlackRock Challenge backend system including:
-
-- Transaction validation
-- Returns calculation (NPS & Index)
-- Performance reporting
-- Dockerized deployment
+Here is your **final short, precise, single-file README.md** ready to submit:
 
 ---
 
-## 🏗 Architecture Overview
+# BlackRock Challenge – Backend API
 
-The application is built using **FastAPI** with a clean modular structure:
+FastAPI-based backend implementing:
+
+* Transaction validation
+* Returns calculation (NPS & Index)
+* Performance reporting
+* Dockerized deployment
+
+---
+
+## 📁 Project Structure
 
 ```
 app/
@@ -21,38 +23,20 @@ app/
  └── performance.py
 ```
 
-### Key Design Principles
-
-- Single source of truth for data models
-- Reusable validation logic
-- Clear separation of concerns
-- Lightweight and efficient design
-- Docker-ready production structure
-
 ---
 
-## 🚀 How to Run Locally
-
-### 1️⃣ Create Virtual Environment
+## 🚀 Run Locally
 
 ```bash
 python -m venv venv
 venv\Scripts\activate   # Windows
-```
+# source venv/bin/activate  # Mac/Linux
 
-### 2️⃣ Install Dependencies
-
-```bash
-python -m pip install -r requirements.txt
-```
-
-### 3️⃣ Start the Server
-
-```bash
+pip install -r requirements.txt
 python -m uvicorn app.main:app --reload --port 5477
 ```
 
-Open Swagger UI:
+Swagger UI:
 
 ```
 http://localhost:5477/docs
@@ -62,104 +46,68 @@ http://localhost:5477/docs
 
 ## 🐳 Run with Docker
 
-### 1️⃣ Build Docker Image
+### Pull & Run (Recommended)
 
 ```bash
-docker build -t blk-hacking-ind-chandresh-pachauri .
+docker pull chandresh2407/blackrock_challenge_chandresh_pachauri
+docker run -p 5477:5477 chandresh2407/blackrock_challenge_chandresh_pachauri
 ```
 
-### 2️⃣ Run Docker Container
-
-```bash
-docker run -p 5477:5477 blk-hacking-ind-chandresh-pachauri
-```
-
-Access Swagger UI:
+Swagger:
 
 ```
 http://localhost:5477/docs
+```
+
+### Build Locally
+
+```bash
+docker build -t blackrock_challenge .
+docker run -p 5477:5477 blackrock_challenge
 ```
 
 ---
 
 ## 📌 API Endpoints
 
-### 🔹 Transaction Validation
+### Validate Transactions
 
-**POST**
-```
-/blackrock/challenge/v1/transactions:validate
-```
+`POST /blackrock/challenge/v1/transactions:validate`
 
-Validation Rules:
-- Negative transaction amounts are rejected
-- Duplicate transactions are rejected
-- Transactions exceeding ceiling are rejected
-- Remaining ceiling is calculated
-- K-period membership is identified
+* Rejects negative, duplicate, and ceiling-exceeding transactions
+* Calculates remaining ceiling
+* Identifies K-period membership
 
 ---
 
-### 🔹 Returns Calculation
+### Returns Calculation
 
-#### NPS Returns
-```
-POST /blackrock/challenge/v1/returns:nps
-```
+**NPS Returns**
+`POST /blackrock/challenge/v1/returns:nps`
 
-#### Index Returns
-```
-POST /blackrock/challenge/v1/returns:index
-```
+* Base return: 8%
+* Tax benefit: 10% of invested amount
 
-Returns include:
-- Total transaction amount
-- Total ceiling
-- Savings breakdown by K periods
-- Profit calculation
-- Tax benefit (NPS only)
+**Index Returns**
+`POST /blackrock/challenge/v1/returns:index`
 
-Assumptions:
-- NPS base return rate: 8%
-- Index base return rate: 6%
-- Inflation reduces effective return
-- Tax benefit = 10% of invested amount (NPS only)
+* Base return: 6%
+* No tax benefit
+
+Responses include total investment, savings breakdown, profit, and effective returns (after inflation).
 
 ---
 
-### 🔹 Performance Report
+### Performance Report
 
-**GET**
-```
-/blackrock/challenge/v1/performance
-```
+`GET /blackrock/challenge/v1/performance`
 
-Returns:
-- Execution time
-- Memory usage (MB)
-- Number of active threads
-
----
-
-## 🧠 Implementation Notes
-
-- Validation logic is reusable across endpoints.
-- Only valid transactions are considered in returns calculation.
-- Clear separation between routing and business logic.
-- Docker image exposes port **5477** as required.
-
----
-
-## 📦 Docker Image
-
-Public Docker image:
-
-```
-https://hub.docker.com/r/chandresh2407/blackrock_challenge_chandresh_pachauri
-```
+Returns execution time, memory usage (MB), and active threads.
 
 ---
 
 ## 👤 Author
 
-Chandresh Pachauri
+**Chandresh Pachauri**
+
+---
