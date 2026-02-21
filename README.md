@@ -155,7 +155,7 @@ Returns:
 Public Docker image:
 
 ```
-docker.io/chandresh2407/blackrock_challenge_chandresh_pachauri
+https://hub.docker.com/r/chandresh2407/blackrock_challenge_chandresh_pachauri
 ```
 
 ---
